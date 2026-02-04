@@ -1,0 +1,47 @@
+package org.example.gritcrm.dao;
+
+import org.example.gritcrm.util.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
+import java.io.Serializable;
+import java.util.List;
+
+public class GenericDAO <T, ID extends Serializable> {
+
+    private final Class<T> persistentClass;
+
+    public GenericDAO(Class<T> persistentClass) {
+        this.persistentClass = persistentClass;
+    }
+
+    public T findById(ID id){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        return session.find(persistentClass, id);
+    }
+
+    public List<T> findAll(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query<T> query = session.createQuery("from " + persistentClass.getSimpleName());
+        return query.getResultList();
+    }
+
+    public void save(T entity){
+        Transaction tx = null;
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            session.persist(entity);
+            tx.commit();
+
+        }catch (Throwable e){
+            if (tx == null) tx.rollback();
+            throw e;
+
+        }
+    }
+
+
+
+}
