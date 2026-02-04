@@ -25,6 +25,10 @@
 
     </form>
 
+<p>
+    If you don't already have an account, you can <a href="/view/register.jsp">register here</a>
+</p>
+
 <%--</body>--%>
 <%--</html>--%>
 <%@include file="/WEB-INF/fragments/footer.jsp"%>
