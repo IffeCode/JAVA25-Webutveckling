@@ -1,9 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/WEB-INF/fragments/header.jsp"%>
+<%@include file="/WEB-INF/fragments/navbar.jsp"%>
 
-    <a href="view/login.jsp">Please login here</a>
-
-
-    <p>Logged in as: ${user.username}</p>
+    <h2>Welcome to the CRM</h2>
 
 <%@include file="/WEB-INF/fragments/footer.jsp"%>

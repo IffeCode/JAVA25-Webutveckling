@@ -24,5 +24,6 @@
         <mapping class="namespace.ClassName" />
 	-->
         <mapping class="org.example.gritcrm.model.User"/>
+        <mapping class="org.example.gritcrm.model.Account"/>
     </session-factory>
 </hibernate-configuration>
