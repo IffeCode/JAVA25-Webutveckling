@@ -3,4 +3,7 @@
 
     <a href="view/login.jsp">Please login here</a>
 
+
+    <p>Logged in as: ${user.username}</p>
+
 <%@include file="/WEB-INF/fragments/footer.jsp"%>

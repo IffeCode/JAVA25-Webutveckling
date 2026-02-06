@@ -8,7 +8,7 @@ import org.hibernate.query.Query;
 import java.io.Serializable;
 import java.util.List;
 
-public class GenericDAO <T, ID extends Serializable> {
+public abstract class GenericDAO <T, ID extends Serializable> {
 
     private final Class<T> persistentClass;
 
@@ -39,6 +39,32 @@ public class GenericDAO <T, ID extends Serializable> {
             if (tx == null) tx.rollback();
             throw e;
 
+        }
+    }
+
+    public void update(T entity){
+        Transaction tx = null;
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            session.merge(entity);
+            tx.commit();
+        }catch (Throwable e){
+            if (tx != null) tx.rollback();
+            throw e;
+        }
+    }
+
+    public void delete(T entity){
+        Transaction tx = null;
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            session.remove(entity);
+            tx.commit();
+        }catch (Throwable e){
+            if (tx != null) tx.rollback();
+            throw e;
         }
     }
 
