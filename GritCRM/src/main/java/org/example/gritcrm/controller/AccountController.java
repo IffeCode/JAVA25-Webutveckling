@@ -35,6 +35,21 @@ public class AccountController extends HttpServlet {
             return;
         }
 
+        if (req.getParameter("id") != null) {
+           openAndRedirect(req,resp, "id", "/view/account/view.jsp");
+           return;
+        }
+
+        if (req.getParameter("deleteId") != null) {
+            String sId = req.getParameter("deleteId");
+            if (sId != null && !sId.isEmpty()) {
+                Integer id = Integer.parseInt(sId);
+                Account account = accountDAO.findById(id);
+                accountDAO.delete(account);
+            }
+        }
+
+
         List<Account>accounts = accountDAO.findAll();
         req.setAttribute("accounts", accounts);
 
@@ -74,4 +89,21 @@ public class AccountController extends HttpServlet {
 
         req.getRequestDispatcher("view/account/list.jsp").forward(req, resp);
     }
+
+    private void openAndRedirect(HttpServletRequest req, HttpServletResponse resp, String parameterName, String viewURI) throws ServletException, IOException {
+
+        AccountDAO accountDAO = new AccountDAO();
+            String sId = req.getParameter(parameterName);
+            Account account = new Account();
+            if (sId != null && !sId.isEmpty()) {
+                Integer id = Integer.parseInt(sId);
+                account = accountDAO.findById(id);
+
+            }
+            req.setAttribute("account", account);
+
+            req.getRequestDispatcher(viewURI).forward(req, resp);
+        }
+
+
 }
