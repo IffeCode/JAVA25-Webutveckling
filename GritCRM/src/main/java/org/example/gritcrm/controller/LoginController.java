@@ -16,6 +16,33 @@ import java.util.Date;
 public class LoginController extends HttpServlet {
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        //Metod för att logga ut användaren
+        try {
+            String logout = req.getParameter("logout");
+
+            if (logout != null) {
+                boolean shouldLogout = Boolean.parseBoolean(logout);
+                if (shouldLogout) {
+                    HttpSession session = req.getSession();
+                    if (session != null) {
+                        session.setAttribute("User", null);
+                        session.invalidate();
+                    }
+
+                    req.setAttribute("message", "You have been logged out!");
+
+                }
+            }
+            req.getRequestDispatcher("view/login.jsp").forward(req, resp);
+        }catch (Throwable t){
+            throw new RuntimeException(t);
+        }
+
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String username = req.getParameter("username") == null ? "" : req.getParameter("username");

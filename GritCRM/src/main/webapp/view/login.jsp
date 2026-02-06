@@ -10,6 +10,9 @@
         <c:if test="${not empty error}">
             <div class="alert alert-danger">${error}</div>
         </c:if>
+        <c:if test="${not empty message}">
+            <div class="alert alert-success">${message}</div>
+        </c:if>
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
             <input type="text" class="form-control" id="username" name="username" value="${username}">
