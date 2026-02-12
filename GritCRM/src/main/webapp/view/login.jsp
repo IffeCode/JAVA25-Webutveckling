@@ -30,7 +30,7 @@
 
 
 <p>
-    If you don't already have an account, you can <a href="/register.jsp">register here</a>
+    If you don't already have an account, you can <a href="/register">register here</a>
 </p>
 
 <%--</body>--%>
