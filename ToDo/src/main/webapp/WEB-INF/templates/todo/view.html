@@ -1,0 +1,12 @@
+<div th:replace="fragments/header"></div>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title" th:text="${todo.title}">Card title</h5>
+        <p class="card-text" th:text="${todo.description}">Some quick example text to build </p>
+        <a th:href="@{/}" class="btn btn-primary">Back</a>
+        <a th:href="@{/todo(id=${todo.id}, action='toggle')}" th:text="${todo.completed ? 'Uncomplete' : 'Complete'}"class="btn btn-primary">Completed</a>
+    </div>
+</div>
+
+<div th:replace="fragments/footer"></div>

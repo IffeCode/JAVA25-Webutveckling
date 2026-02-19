@@ -1,0 +1,24 @@
+<div th:replace="fragments/header"></div>
+
+    <form method="POST" th:action="@{/todo}">
+
+        <input type="hidden" name="id" th:value="${todo.id}">
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" aria-describedby="titleHelp" th:value="${todo.title}">
+            <div id="titleHelp" class="form-text">Please give your todo a title</div>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">description</label>
+            <textarea id="description" class="form-control" name="description" rows="3" th:text="${todo.description}"></textarea>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="completed" name="completed" value="true" th:checked="${todo.completed}">
+            <label class="form-check-label" for="completed">Done</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+
+<div th:replace="fragments/footer"></div>
